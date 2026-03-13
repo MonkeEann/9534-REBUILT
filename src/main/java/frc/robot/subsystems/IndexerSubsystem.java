@@ -2,9 +2,13 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 public class IndexerSubsystem extends SubsystemBase {
-    
+    private final SparkMax indexerMotor = new SparkMax(Constants.IndexerConstants.kIndexerMotorPort, MotorType.kBrushless);
     
     public IndexerSubsystem(){
     }
@@ -36,6 +40,11 @@ public class IndexerSubsystem extends SubsystemBase {
 @Override
     public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+}
+
+public void setIndexer(double speed) {
+    // Set the speed of the indexer motors here
+    indexerMotor.set(speed);
 }
 }
 

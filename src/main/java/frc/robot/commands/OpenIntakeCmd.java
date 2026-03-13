@@ -4,42 +4,33 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.IndexerSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.Constants;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class TurretShootCmd extends Command {
+public class OpenIntakeCmd extends Command {
     @SuppressWarnings("PMD.UnusedPrivateField")
-    private final IndexerSubsystem indexerSubsystem;
-    private final TurretSubsystem turretSubsystem;
+    private final IntakeSubsystem IntakeSubsystem;
 
-    public TurretShootCmd(TurretSubsystem turretSubsystem, IndexerSubsystem indexerSubsystem) {
-        this.turretSubsystem = turretSubsystem;
-        this.indexerSubsystem = indexerSubsystem;
-
-        addRequirements(turretSubsystem, indexerSubsystem);
+    public OpenIntakeCmd(IntakeSubsystem IntakeSubsystem) {
+        this.IntakeSubsystem = IntakeSubsystem;
+        addRequirements(IntakeSubsystem);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        turretSubsystem.startTurretCmd().schedule();
     }
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-    if (turretSubsystem.isAtSpeed()) {
-        indexerSubsystem.setIndexer(1);
-    } else {
-        indexerSubsystem.setIndexer(0);
-    }
+        IntakeSubsystem.setIntakeArm(Constants.IntakeConstants.kIntakeOpenSetpoint);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        indexerSubsystem.setIndexer(0);
     }
 
     // Returns true when the command should end.

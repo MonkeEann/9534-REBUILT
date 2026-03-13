@@ -5,38 +5,38 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.IntakeSubsystem;
-import edu.wpi.first.math.controller.PIDController;
+import frc.robot.subsystems.StorageSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class IntakeArmPIDCmd extends Command {
+public class IntakeBallsCmd extends Command {
     @SuppressWarnings("PMD.UnusedPrivateField")
-    private final IntakeSubsystem IntakeSubsystem;
-    private final PIDController pidController;
+    private final IntakeSubsystem intakeSubsystem;
+    private final StorageSubsystem storageSubsystem;
 
-    public IntakeArmPIDCmd(IntakeSubsystem IntakeSubsystem, double setPoint) {
-        this.IntakeSubsystem = IntakeSubsystem;
-        this.pidController = new PIDController(3, 0, 0.08);
-        pidController.setSetpoint(setPoint);
-        addRequirements(IntakeSubsystem);
+    public IntakeBallsCmd(IntakeSubsystem intakeSubsystem, StorageSubsystem storageSubsystem) {
+        this.intakeSubsystem = intakeSubsystem;
+        this.storageSubsystem = storageSubsystem;
+
+        addRequirements(intakeSubsystem, storageSubsystem);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        pidController.reset();
     }
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double output = pidController.calculate(IntakeSubsystem.getIntakeArmPosition());
-        IntakeSubsystem.setIntakeArm(output);
+        intakeSubsystem.setIntakeRollers(1);
+        storageSubsystem.setStorageRollers(1);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        IntakeSubsystem.setIntakeArm(0);
+        intakeSubsystem.setIntakeRollers(0);
+        storageSubsystem.setStorageRollers(0);
     }
 
     // Returns true when the command should end.

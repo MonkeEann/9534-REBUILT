@@ -28,6 +28,7 @@ public final class Constants {
   }
   public static final class IntakeConstants {
     public static final int kIntakeOpenSetpoint = 0;
+    public static final int kIntakeClosedSetpoint = 0;
     public static final int kIntakeRollersMotorPort = 5;
     public static final int kIntakeLiftMotorPort = 6;
   }
@@ -38,7 +39,9 @@ public final class Constants {
     public static final int kIndexerMotorPort = 8;
   }
   public static final class TurretConstants {
-    public static final int kTurretLMotorPort = 9;
-    public static final int kTurretRMotorPort = 10;
+    public static final int kTurretLMotorID = 9;
+    public static final int kTurretRMotorID = 10;
+    public static final int kTurretRotationMotorID = 11;
+    public static final double kTurretSetpoint = 3000;
   }
 }
