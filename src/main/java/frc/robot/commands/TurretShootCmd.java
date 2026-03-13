@@ -4,21 +4,22 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class IntakeArmPIDCmd extends Command {
+public class TurretShootCmd extends Command {
     @SuppressWarnings("PMD.UnusedPrivateField")
-    private final IntakeSubsystem IntakeSubsystem;
+    private final IndexerSubsystem indexer;
     private final PIDController pidController;
 
-    public IntakeArmPIDCmd(IntakeSubsystem IntakeSubsystem, double setPoint) {
-        this.IntakeSubsystem = IntakeSubsystem;
-        this.pidController = new PIDController(3, 0, 0.08);
+    public IntakeArmPIDCmd(IndexerSubsystem indexer, double setPoint) {
+        this.indexer = IndexerSubsystem;
+        this.pidController = new PIDController(0.02, 0, 0.08);
         pidController.setSetpoint(setPoint);
-        addRequirements(IntakeSubsystem);
+        addRequirements(IndexerSubsystem);
     }
 
     // Called when the command is initially scheduled.
